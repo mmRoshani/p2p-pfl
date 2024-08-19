@@ -1,8 +1,14 @@
 version: 1
 engine_release: 1
 
+#! the federated learning rounds is T1+T2
 hyperparameter:
-    federated_learning_rounds: 1
     number_of_all_clients: 10   # known as `n` in article
-
-    client_similarity_alfa: 0.5 # better to be 0.5 (change base on network density)
+    number_of_rounds_in_the_first_stage: 5 # known as `T1` in article 
+    number_of_rounds_in_the_second_stage: 10 # known as `T2` in article
+    training_epochs: 1 # known as `E` in article
+    training_learning_rate: 0.01 # known as `η` in article
+    size_of_aggregation_neighbor_list: 5 # known as `k` in article
+    size_of_neighbor_candidate_list: 3 # known as `l` in article
+    round_interval_of_NAEM_in_the_second_stage: 2 # know as `τ` in article
+    client_similarity_alfa: 0.5 # better to be 0.5 (change base on network density) known as `α` in paper
