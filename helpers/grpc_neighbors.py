@@ -28,6 +28,7 @@ from configs.self.log.logger_bootstrap import logger_bootstrap
 from constants.keys import Keys
 from constants.paths import Paths
 from helpers.neighbors import Neighbors
+from utils.get_nested_value import get_nested_value
 
 
 class GrpcNeighbors(Neighbors):
@@ -94,7 +95,7 @@ class GrpcNeighbors(Neighbors):
             if handshake_msg:
 
                 engine_grpc_timeout: str = str(
-                    self.engine_config.get(Keys.ENGINE_GRPC_TIMEOUT)
+                    get_nested_value(self.engine_config, Keys.ENGINE_GRPC_TIMEOUT)
                 )
 
                 res = stub.handshake(

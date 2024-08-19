@@ -1,5 +1,4 @@
 version: 1
-engine_release: 1
 
 #! the federated learning rounds is T1+T2
 hyperparameter:
@@ -13,19 +12,24 @@ hyperparameter:
     round_interval_of_NAEM_in_the_second_stage: 2 # know as `τ` in article
     client_similarity_alfa: 0.5 # better to be 0.5 (change base on network density) known as `α` in paper
 
-    "rpc & gossip"
-    engine_grpc_timeout: 10 # float,   maximum time (seconds) to wait for a gRPC request.
-    engine_gossip_period: 0.1 # float, period (seconds) for the gossip protocol.
-    engine_gossip_ttl: 10 # int, period (seconds) for the gossip protocol.
-    engine_gossip_messages_per_period: 100 # int, number of messages to send in each gossip period.
-    engine_gossip_amount_last_messages_saved: 100 # int, umber of last messages saved in the gossip protocol (avoid multiple message processing).
-    engine_gossip_models_period: 1 # int, period of gossiping models (times by second).
-    engine_gossip_models_per_round: 2 # int, amount of equal rounds to exit gossiping. Careful, a low value can cause an early stop of gossiping.
-    engine_gossip_exit_on_x_equal_rounds: 10 # int, amount of equal rounds to exit gossiping. Careful, a low value can cause an early stop of gossiping.
+engine:
+    release: 0.0.1
+    
+    grpc:
+        timeout: 10 # float,   maximum time (seconds) to wait for a gRPC request.
+    
+    gossip:
+        period: 0.1 # float, period (seconds) for the gossip protocol.
+        ttl: 10 # int, period (seconds) for the gossip protocol.
+        messages_per_period: 100 # int, number of messages to send in each gossip period.
+        amount_last_messages_saved: 100 # int, umber of last messages saved in the gossip protocol (avoid multiple message processing).
+        models_period: 1 # int, period of gossiping models (times by second).
+        models_per_round: 2 # int, amount of equal rounds to exit gossiping. Careful, a low value can cause an early stop of gossiping.
+        exit_on_x_equal_rounds: 10 # int, amount of equal rounds to exit gossiping. Careful, a low value can cause an early stop of gossiping.
 
-    "heartbeat"
-    heartbeat_period: 2 # float, period (seconds) to send heartbeats 
-    heartbeat_timeout: 5 # float, timeout (seconds) for a node to be considered dead.
+    heartbeat:
+        period: 2 # float, period (seconds) to send heartbeats 
+        timeout: 5 # float, timeout (seconds) for a node to be considered dead.
 
 
 

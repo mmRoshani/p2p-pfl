@@ -31,6 +31,7 @@ from constants.paths import Paths
 from helpers.exceptions import NeighborNotConnectedError
 from helpers.grpc_neighbors import GrpcNeighbors
 from interfaces.client import Client
+from utils.get_nested_value import get_nested_value
 
 
 class GrpcClient(Client):
@@ -84,7 +85,7 @@ class GrpcClient(Client):
 
         return node_pb2.Message(
             source=self.__self_addr,
-            ttl=self.engine_config.get(Keys.ENGINE_GOSSIP_TTL),
+            ttl=get_nested_value(self.engine_config, Keys.ENGINE_GOSSIP_TTL),
             hash=hs,
             cmd=cmd,
             args=args,
@@ -158,11 +159,17 @@ class GrpcClient(Client):
                 # Send message
                 if isinstance(msg, node_pb2.Message):
                     res = node_stub.send_message(
-                        msg, timeout=self.engine_config.get(Keys.ENGINE_GRPC_TIMEOUT)
+                        msg,
+                        timeout=get_nested_value(
+                            self.engine_config, Keys.ENGINE_GRPC_TIMEOUT
+                        ),
                     )
                 elif isinstance(msg, node_pb2.Weights):
                     res = node_stub.send_weights(
-                        msg, timeout=self.engine_config.get(Keys.ENGINE_GRPC_TIMEOUT)
+                        msg,
+                        timeout=get_nested_value(
+                            self.engine_config, Keys.ENGINE_GRPC_TIMEOUT
+                        ),
                     )
                 else:
                     raise TypeError("Message type not supported.")

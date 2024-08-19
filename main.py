@@ -4,6 +4,7 @@ from constants.keys import Keys
 from constants.paths import Paths
 from decorators.get_execution_time import get_execution_time
 from utils.color import Color
+from utils.get_nested_value import get_nested_value
 
 
 @get_execution_time
@@ -18,7 +19,7 @@ def engine() -> None:
 
     log.info(Color.colored("loading engine config", "magenta"))
     engine_config = engine_bootstrap(Paths.ENGINE_CONFIG)
-    engine_release: str = str(engine_config.get(Keys.ENGINE_RELEASE))
+    engine_release: str = str(get_nested_value(engine_config, Keys.ENGINE_RELEASE))
 
     log.info(Color.colored(f"engine {Color.colored("(release: " + engine_release + ")", "green")} config loaded successfully", "green"))
 

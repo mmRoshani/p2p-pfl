@@ -22,6 +22,7 @@ from typing import Any, Callable, Dict, List, Optional, Union
 from commands.heartbeat_command import HeartbeatCommand
 from grpc.compiled import node_pb2
 from configs.engine.engine_bootstrap import engine_bootstrap
+from constants import keys
 from constants.keys import Keys
 from constants.paths import Paths
 from helpers.address import AddressParser
@@ -32,6 +33,7 @@ from helpers.grpc_server import GrpcServer
 from helpers.heartbeater import Heartbeater
 from interfaces.command import Command
 from interfaces.communication_protocol import CommunicationProtocol
+from utils.get_nested_value import get_nested_value
 
 
 class GrpcCommunicationProtocol(CommunicationProtocol):
@@ -231,7 +233,9 @@ class GrpcCommunicationProtocol(CommunicationProtocol):
 
         """
         if period is None:
-            period = self.engine_config.get(Keys.ENGINE_GOSSIP_MODELS_PERIOD)
+            period = get_nested_value(
+                self.engine_config, keys.ENGINE_GOSSIP_MODELS_PERIOD
+            )
         self._gossiper.gossip_weights(
             early_stopping_fn,
             get_candidates_fn,

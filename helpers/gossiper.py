@@ -24,9 +24,10 @@ from typing import Any, Callable, List, Optional, Tuple
 
 from configs.engine.engine_bootstrap import engine_bootstrap
 from configs.self.log.logger_bootstrap import logger_bootstrap
-from constants import keys
+from constants.keys import Keys
 from constants.paths import Paths
 from interfaces.client import Client
+from utils.get_nested_value import get_nested_value
 
 
 class Gossiper(threading.Thread):
@@ -56,10 +57,10 @@ class Gossiper(threading.Thread):
     ) -> None:
         """Initialize the gossiper."""
         if period is None:
-            period = self.engine_config.get(keys.ENGINE_GOSSIP_PERIOD)
+            period = get_nested_value(self.engine_config, Keys.ENGINE_GOSSIP_PERIOD)
         if messages_per_period is None:
-            messages_per_period = self.engine_config.get(
-                keys.ENGINE_GOSSIP_MESSAGES_PER_PERIOD
+            messages_per_period = get_nested_value(
+                self.engine_config, Keys.ENGINE_GOSSIP_MESSAGES_PER_PERIOD
             )
         # Thread
         super().__init__()
@@ -123,8 +124,8 @@ class Gossiper(threading.Thread):
             self.__processed_messages_lock.release()
             return False
         # If there are more than X messages, remove the oldest one
-        if len(self.__processed_messages) > self.engine_config.get(
-            keys.ENGINE_GOSSIP_AMOUNT_LAST_MESSAGES_SAVED
+        if len(self.__processed_messages) > get_nested_value(
+            self.engine_config, Keys.ENGINE_GOSSIP_AMOUNT_LAST_MESSAGES_SAVED
         ):
             self.__processed_messages.pop(0)
         # Add message
@@ -219,14 +220,14 @@ class Gossiper(threading.Thread):
 
             # Save state of neighbors. If nodes are not responding gossip will stop
             self.log.debug(self.__self_addr, f"Gossip remaining nodes: {neis}")
-            if len(last_x_status) != self.engine_config.get(
-                keys.ENGINE_GOSSIP_EXIT_ON_X_EQUAL_ROUNDS
+            if len(last_x_status) != get_nested_value(
+                self.engine_config, Keys.ENGINE_GOSSIP_EXIT_ON_X_EQUAL_ROUNDS
             ):
                 last_x_status.append(status_fn())
             else:
                 last_x_status[j] = str(status_fn())
-                j = (j + 1) % self.engine_config.get(
-                    keys.ENGINE_GOSSIP_EXIT_ON_X_EQUAL_ROUNDS
+                j = (j + 1) % get_nested_value(
+                    self.engine_config, Keys.ENGINE_GOSSIP_EXIT_ON_X_EQUAL_ROUNDS
                 )
 
                 # Check if las messages are the same
@@ -235,7 +236,7 @@ class Gossiper(threading.Thread):
                         break
                     self.log.info(
                         self.__self_addr,
-                        f"Gossiping exited for {self.engine_config.get(keys.ENGINE_GOSSIP_EXIT_ON_X_EQUAL_ROUNDS)} equal rounds.",
+                        f"Gossiping exited for {get_nested_value(self.engine_config, Keys.ENGINE_GOSSIP_EXIT_ON_X_EQUAL_ROUNDS)} equal rounds.",
                     )
                     self.log.debug(
                         self.__self_addr, f"Gossip last status: {last_x_status[-1]}"
@@ -244,7 +245,10 @@ class Gossiper(threading.Thread):
 
             # Select a random subset of neighbors
             samples = min(
-                self.engine_config.get(keys.ENGINE_GOSSIP_MODELS_PER_ROUND), len(neis)
+                get_nested_value(
+                    self.engine_config, Keys.ENGINE_GOSSIP_MODELS_PER_ROUND
+                ),
+                len(neis),
             )
             neis = random.sample(neis, samples)
 

@@ -26,6 +26,7 @@ from constants.keys import Keys
 from constants.paths import Paths
 from helpers.neighbors import Neighbors
 from interfaces.client import Client
+from utils.get_nested_value import get_nested_value
 
 HEARTBEATER_CMD_NAME = "beat"
 
@@ -87,9 +88,11 @@ class Heartbeater(threading.Thread):
         timeout: Optional[float] = None,
     ) -> None:
         if period is None:
-            period = self.engine_config.get(Keys.HEARTBEAT_PERIOD)
+            period = get_nested_value(self.engine_config, Keys.ENGINE_HEARTBEAT_PERIOD)
         if timeout is None:
-            timeout = self.engine_config.get(Keys.HEARTBEAT_TIMEOUT)
+            timeout = get_nested_value(
+                self.engine_config, Keys.ENGINE_HEARTBEAT_TIMEOUT
+            )
         toggle = False
         while not self.__heartbeat_terminate_flag.is_set():
             t = time.time()
