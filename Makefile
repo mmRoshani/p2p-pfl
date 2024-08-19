@@ -1,9 +1,15 @@
-update-req:	# update project reqiremnts
+update-req:
 	@clear
-	@echo "update project reqiremnts"
+	@echo "[Makefile]:	update project reqiremnts"
 	@pip freeze > requirements.txt
 
 clean:
 	@clear
-	@echo "1.remove error.log file"
-	@rm error.log
+	@echo "[Makefile]:	multi stage project cleansing"
+	@echo "1.remove INFO log file"
+	@rm info.log
+
+run:
+	@clear
+	@echo "[Makefile]:	run application (see application config file for more info)"
+	@python3 main.py
