@@ -8,7 +8,7 @@ def get_absolute_path(func):
     @functools.wraps(func)
     def wrapper_get_absolute_path(*args, **kwargs):
         for key, val in kwargs.items():
-            if key.endswith(Keys.file_name_suffix):
+            if key.endswith(Keys.FILE_NAME_SUFFIX):
                 kwargs[key] = Path(val).absolute()
         return func(*args, **kwargs)
 

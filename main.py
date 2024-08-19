@@ -11,14 +11,14 @@ def engine() -> None:
     # config logger
     log = logger_bootstrap(
         instance_name=__name__,
-        log_config_file_name=Paths.logger_config,
+        log_config_file_name=Paths.LOGGER_CONFIG,
     )
 
     log.info(Color.colored("engine started", "yellow"))
 
     log.info(Color.colored("loading engine config", "magenta"))
-    engine_config = engine_bootstrap(Paths.engine_config)
-    engine_release: str = str(engine_config.get(Keys.engine_release))
+    engine_config = engine_bootstrap(Paths.ENGINE_CONFIG)
+    engine_release: str = str(engine_config.get(Keys.ENGINE_RELEASE))
 
     log.info(Color.colored(f"engine {Color.colored("(release: " + engine_release + ")", "green")} config loaded successfully", "green"))
 

@@ -1,3 +1,3 @@
 class Paths:
-    logger_config: str = "configs/logger/logging_config.yaml"
-    engine_config: str = "configs/engine/engine_config.yaml"
+    LOGGER_CONFIG: str = "configs/logger/logging_config.yaml"
+    ENGINE_CONFIG: str = "configs/engine/ENGINE_CONFIG.yaml"

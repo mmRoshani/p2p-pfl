@@ -1,9 +1,0 @@
-syntax = "proto3";
-
-package peer;
-
-message Handshake {
-    string address = 1;
-}
-
-// network topology

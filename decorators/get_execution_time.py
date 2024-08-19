@@ -16,7 +16,7 @@ def get_execution_time(func):
         
         log = logger_bootstrap(
             instance_name=__name__,
-            log_config_file_name=Paths.logger_config,
+            log_config_file_name=Paths.LOGGER_CONFIG,
         )
 
         log.info(f"finished {Color.colored_bold(func.__name__ + "()", 'green')} in {Color.colored_underlined(run_time_pretty, 'light_green')} secs")

@@ -10,7 +10,7 @@ see [instructions](./docs/instructions.md) to run the engine
 
 The config yaml files are located in [config](./configs/) directory.
 
-- [engine configuration](./configs/engine/engine_config.yaml)
+- [engine configuration](./configs/engine/ENGINE_CONFIG.yaml)
 - [logger configuration](./configs/logger/logging_config.yaml)
 
 
