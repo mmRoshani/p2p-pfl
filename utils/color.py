@@ -1,7 +1,7 @@
 from termcolor import colored
 
 
-class color:
+class Color:
 
     @staticmethod
     def colored(text: str, color: str) -> str:

@@ -1,8 +1,8 @@
 import functools
 import time
-
+from constants.paths import Paths
 from configs.logger.logger_bootstrap import logger_bootstrap
-from utils.color import color
+from utils.color import Color
 
 
 def get_execution_time(func):
@@ -16,10 +16,10 @@ def get_execution_time(func):
         
         log = logger_bootstrap(
             instance_name=__name__,
-            log_config_file_name="configs/logger/logging_config.yaml",
+            log_config_file_name=Paths.logger_config,
         )
 
-        log.info(f"finished {color.colored_bold(func.__name__ + "()", 'green')} in {color.colored_underlined(run_time_pretty, 'light_green')} secs")
+        log.info(f"finished {Color.colored_bold(func.__name__ + "()", 'green')} in {Color.colored_underlined(run_time_pretty, 'light_green')} secs")
         return value
 
     return wrapper_get_execution_time

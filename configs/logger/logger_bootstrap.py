@@ -3,6 +3,7 @@ import yaml
 from decorators.get_absolute_path import get_absolute_path
 
 
+# the purpose of this decorator is OS compatibility
 @get_absolute_path
 def logger_bootstrap(instance_name: str, log_config_file_name: str) -> logging.Logger:
 

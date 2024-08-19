@@ -1,0 +1,5 @@
+version: 1
+engine_release: 1
+
+hyperparameter:
+    client_similarity_alfa: 0.5 # better to be 0.5 (change base on network density)
