@@ -30,6 +30,9 @@ engine:
     heartbeat:
         period: 2 # float, period (seconds) to send heartbeats 
         timeout: 5 # float, timeout (seconds) for a node to be considered dead.
+    
+    monitoring:
+        resource_monitoring_period: 1 # int, period (seconds) to send resource monitor information. (web)
 
 
 

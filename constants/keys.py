@@ -7,6 +7,7 @@ class Keys:
 
     ENGINE_RELEASE: str = "engine.release"
     ENGINE_GRPC_TIMEOUT: str = "engine.grpc.timeout"
+
     """engine.gossip"""
     ENGINE_GOSSIP_PERIOD: str = "engine.gossip.period"
     ENGINE_GOSSIP_TTL: str = "engine.gossip.ttl"
@@ -21,3 +22,8 @@ class Keys:
     "engine.heartbeat"
     ENGINE_HEARTBEAT_PERIOD: str = "engine.heartbeat.period"
     ENGINE_HEARTBEAT_TIMEOUT: str = "engine.heartbeat.timeout"
+
+    "engine.monitoring"
+    ENGINE_RESOURCE_MONITORING_PERIOD: str = (
+        "engine.monitoring.resource_monitoring_period"
+    )

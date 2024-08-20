@@ -61,6 +61,7 @@ psutil==6.0.0
 ptyprocess==0.7.0
 pure_eval==0.2.3
 Pygments==2.18.0
+pyheck==0.1.5
 pyparsing==3.1.2
 pypickle==1.1.0
 PyQt6==6.7.1
