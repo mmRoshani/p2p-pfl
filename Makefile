@@ -17,6 +17,6 @@ run:
 proto-gen:
 	@clear
 	@echo "[Makefile]:	compiling proto files"
-	@python3 -m grpc_tools.protoc -I=grpc/protobufs --python_out=grpc/compiled --grpc_python_out=grpc/compiled grpc/protobufs/node.proto --mypy_out=grpc/compiled
+	@python3 -m grpc_tools.protoc -I=modules/grpc/protobufs --python_out=modules/grpc/compiled --grpc_python_out=modules/grpc/compiled modules/grpc/protobufs/node.proto --mypy_out=modules/grpc/compiled
 
 
