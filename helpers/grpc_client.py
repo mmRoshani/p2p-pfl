@@ -28,7 +28,7 @@ from configs.engine.engine_bootstrap import engine_bootstrap
 from configs.self.log.logger_bootstrap import logger_bootstrap
 from constants.keys import Keys
 from constants.paths import Paths
-from helpers.exceptions import NeighborNotConnectedError
+from helpers.exceptions.communication_exceptions import NeighborNotConnectedError
 from helpers.grpc_neighbors import GrpcNeighbors
 from interfaces.client import Client
 from utils.get_nested_value import get_nested_value

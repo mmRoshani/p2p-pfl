@@ -34,5 +34,7 @@ engine:
     monitoring:
         resource_monitoring_period: 1 # int, period (seconds) to send resource monitor information. (web)
 
+    learning:
+        aggregation_timeout: 300 # int, timeout (seconds) for a node to wait for other models. Timeout starts when the first model is added.
 
 

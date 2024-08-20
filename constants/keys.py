@@ -27,3 +27,6 @@ class Keys:
     ENGINE_RESOURCE_MONITORING_PERIOD: str = (
         "engine.monitoring.resource_monitoring_period"
     )
+
+    "engine.learning"
+    ENGINE_LEARNING_AGGREGATION_TIMEOUT: str = "engine.learning.aggregation_timeout"
